@@ -16,7 +16,7 @@ var stringifyJSON = function(obj) {
   		return obj.toString();
   		break;
 	case("string"):
-		return ("\""+obj+"\"");
+		return "\""+obj+"\"";
 		break;
 	case("boolean"):
 		return obj.toString();
@@ -27,6 +27,8 @@ var stringifyJSON = function(obj) {
 		break;
 	case("function"):
 		break;
+	case("object"):
+//put everything here
 	default:
 		break;
 
@@ -36,19 +38,19 @@ var stringifyJSON = function(obj) {
   	
   	//null
   	if(obj === null) {
-  		return "null";
+  		return 'null';
   	}
 
   	//Array
 
   	if(Array.isArray(obj)) {
  
-  		var result ="";
+  		var result ='';
 
   		if(obj.length >1){
 
   		for(var i=0; i < obj.length -1;) {
-  			result = result + stringifyJSON(obj[i]) +",";
+  			result = result + stringifyJSON(obj[i]) +',';
   			i++;
   			if(i===obj.length-1){
   				result=result+obj[obj.length-1];
@@ -62,7 +64,7 @@ var stringifyJSON = function(obj) {
   			result = stringifyJSON(obj[0]);
   		}
 
-  		return "[" +result + "]";
+  		return '[' +result + ']';
 
 /*
   		if(obj.length > 1){
@@ -91,7 +93,8 @@ var stringifyJSON = function(obj) {
   		var result ="";
 
   		for(var key in obj){
-  			result += key + ":" + stringifyJSON(obj[key]) +",";
+  			result += stringifyJSON(key) + ":" + stringifyJSON(obj[key]); //+",";
+  			var arr = Object.keys(obj);
   		}
 
   	   return "{ " +result + "}";
