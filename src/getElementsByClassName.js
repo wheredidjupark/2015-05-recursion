@@ -30,32 +30,25 @@ var getElementsByClassName = function(className){
   
 
 var investigate = function(context, className){
-	var target; 
-	if(context.childNodes){
-		/*
-		if(containsClass(context, className)){
-			result.push(context);
-		}
-		*/
 
-		if(context.childNodes){
-			target = context.childNodes;
-			for(var i=0; i < target.length; i++){
-				if(containsClass(target[i],className)){
-					result.push(target[i]);
-				}
-				investigate(target[i], className);
-			}	
-		}
-
-	}
-	else
-	{
-		return;
-	}
+if(context !== undefined){
+  if(containsClass(context,className) ){
+    result.push(context);
+  }
+}
+else
+{
+  return;
 }
 
-investigate(document, className); 
+var target = context.childNodes;
+
+for(var i=0; i < target.length; i++){
+  investigate(target[i] ,className);
+  }
+}
+
+investigate(document.body, className); 
   //You should use document.body, element.childNodes, and element.classList
   //first target body as the target
   //then inspect each child node in the body
