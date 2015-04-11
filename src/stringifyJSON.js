@@ -91,10 +91,15 @@ var stringifyJSON = function(obj) {
   		*/
   		else{
   		var result ="";
+  		var index = 0;
 
   		for(var key in obj){
-  			result += stringifyJSON(key) + ":" + stringifyJSON(obj[key]); //+",";
-  			var arr = Object.keys(obj);
+  			result += stringifyJSON(key) + ":" + stringifyJSON(obj[key]); 
+  			if(index < Object.keys(obj).length-1) {
+  				result += ","
+  			}
+  			index++;
+
   		}
 
   	   return "{ " +result + "}";
